@@ -11,15 +11,53 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
-    <LinearLayout
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="*"
+            android:weightSum="5">
+
+        <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="@string/med_points"
+                    android:onClick="startMapActivity"/>
+        </TableRow>
+
+        <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="@string/lead_to_med_points"
+                    android:onClick="startLeadActivity"/>
+        </TableRow>
+    </TableLayout>
+
+    <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <Button
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight=".70"
                 android:text="@string/med_points"
                 android:onClick="startMapActivity"/>
-    </LinearLayout>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".70"
+                android:text="@string/lead_to_med_points"
+                android:onClick="startLeadActivity"/>
+    </LinearLayout>-->
 
 </RelativeLayout>

@@ -38,9 +38,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("unused")
     public void startMapActivity(View view) {
         Intent intent = new Intent(this, MedicalPointsMapsActivity.class);
         startActivity(intent);
+    }
+
+    public void startLeadActivity(View view) {
+//todo:
     }
 }

@@ -20,7 +20,7 @@ public class MarkerUtils {
 
     public static List<MedicalPoint> createChildrenMedicalPoints() {
         List<MedicalPoint> medicalPoints = new ArrayList<>();
-        medicalPoints.add(new MedicalPoint(new LatLng(50.011377, 20.000529), "Szpitalny oddział ratunkowy uniwersyteckiego szpitala dziecięcego", "Wielicka 265\t"));
+        medicalPoints.add(new MedicalPoint(new LatLng(50.011377, 20.000529), "Szpitalny oddział ratunkowy uniwersyteckiego szpitala dziecięcego", "Wielicka 265\t12 658 20 11"));
         return medicalPoints;
     }
 }
