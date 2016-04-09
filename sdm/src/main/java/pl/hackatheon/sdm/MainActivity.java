@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import pl.hackatheon.sdm.medical_points.MedicalPointsMapsActivity;
 
 public class MainActivity extends AppCompatActivity {
 

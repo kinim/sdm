@@ -1,12 +1,19 @@
-package pl.hackatheon.sdm;
+package pl.hackatheon.sdm.medical_points;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import pl.hackatheon.sdm.R;
+import pl.hackatheon.sdm.medical_points.util.MedicalPointUtils;
+
+import java.util.List;
 
 public class MedicalPointsMapsActivity extends FragmentActivity {
 
@@ -54,12 +61,27 @@ public class MedicalPointsMapsActivity extends FragmentActivity {
     }
 
     /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        setInitialCameraPosition();
+        addMedicalPoints();
+    }
+
+    private void setInitialCameraPosition() {
+        float zoom = 15.0f;
+        LatLng target = new LatLng(50.059301, 19.938862);
+        CameraPosition cameraPosition = new CameraPosition(target, zoom, 0.0f, 0.0f);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+        mMap.moveCamera(cameraUpdate);
+    }
+
+    private void addMedicalPoints() {
+        List<MedicalPoint> medicalPointList = MedicalPointUtils.createAllMedicalPoints();
+        for(MedicalPoint medicalPoint : medicalPointList) {
+            mMap.addMarker(new MarkerOptions().position(medicalPoint.getLatLng()).title(medicalPoint.getTitle()).snippet(medicalPoint.getAddress()));
+        }
     }
 }
