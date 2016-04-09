@@ -4,4 +4,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="med_points">Medical points</string>
     <string name="lead_to_med_points">Lead to the nearest medical point</string>
+    <string name="title_activity_lead_to_medical_point">LeadToMedicalPoint</string>
 </resources>

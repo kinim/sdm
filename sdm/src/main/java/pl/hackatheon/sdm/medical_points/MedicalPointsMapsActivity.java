@@ -70,7 +70,7 @@ public class MedicalPointsMapsActivity extends FragmentActivity {
     }
 
     private void setInitialCameraPosition() {
-        float zoom = 15.0f;
+        float zoom = 10.0f;
         LatLng target = new LatLng(50.059301, 19.938862);
         CameraPosition cameraPosition = new CameraPosition(target, zoom, 0.0f, 0.0f);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
@@ -78,14 +78,14 @@ public class MedicalPointsMapsActivity extends FragmentActivity {
     }
 
     private void addMedicalPoints() {
-        for(MedicalPoint medicalPoint : MarkerUtils.createStandardMedicalPoints()) {
+        for (MedicalPoint medicalPoint : MarkerUtils.getStandardMedicalPoints()) {
             mMap.addMarker(new MarkerOptions()
                     .position(medicalPoint.getLatLng())
                     .title(medicalPoint.getTitle())
                     .snippet(medicalPoint.getAddress())
             );
         }
-        for(MedicalPoint medicalPoint : MarkerUtils.createChildrenMedicalPoints()) {
+        for (MedicalPoint medicalPoint : MarkerUtils.getChildrenMedicalPoints()) {
             mMap.addMarker(new MarkerOptions()
                     .position(medicalPoint.getLatLng())
                     .title(medicalPoint.getTitle())
