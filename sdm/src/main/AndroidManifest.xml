@@ -47,10 +47,6 @@
                 android:name=".medical_points.MedicalPointsMapsActivity"
                 android:label="@string/title_activity_maps">
         </activity>
-        <activity
-                android:name=".medical_points.LeadToMedicalPointActivity"
-                android:label="@string/title_activity_lead_to_medical_point">
-        </activity>
     </application>
 
 </manifest>

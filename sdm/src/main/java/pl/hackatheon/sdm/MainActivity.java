@@ -101,4 +101,12 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
+
+    public void startLeadToBatteryActivity(View view) {
+
+    }
+
+    public void startFlashLightActivity(View view) {
+
+    }
 }
