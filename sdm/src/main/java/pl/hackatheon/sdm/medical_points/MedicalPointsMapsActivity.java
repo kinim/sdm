@@ -7,13 +7,12 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import pl.hackatheon.sdm.R;
-import pl.hackatheon.sdm.medical_points.util.MedicalPointUtils;
-
-import java.util.List;
+import pl.hackatheon.sdm.medical_points.util.MarkerUtils;
 
 public class MedicalPointsMapsActivity extends FragmentActivity {
 
@@ -79,9 +78,20 @@ public class MedicalPointsMapsActivity extends FragmentActivity {
     }
 
     private void addMedicalPoints() {
-        List<MedicalPoint> medicalPointList = MedicalPointUtils.createAllMedicalPoints();
-        for(MedicalPoint medicalPoint : medicalPointList) {
-            mMap.addMarker(new MarkerOptions().position(medicalPoint.getLatLng()).title(medicalPoint.getTitle()).snippet(medicalPoint.getAddress()));
+        for(MedicalPoint medicalPoint : MarkerUtils.createStandardMedicalPoints()) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(medicalPoint.getLatLng())
+                    .title(medicalPoint.getTitle())
+                    .snippet(medicalPoint.getAddress())
+            );
+        }
+        for(MedicalPoint medicalPoint : MarkerUtils.createChildrenMedicalPoints()) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(medicalPoint.getLatLng())
+                    .title(medicalPoint.getTitle())
+                    .snippet(medicalPoint.getAddress())
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.baby_svg))
+            );
         }
     }
 }
