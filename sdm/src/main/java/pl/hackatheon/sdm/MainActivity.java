@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import pl.hackatheon.sdm.flashlight.FlashlightFullscreenActivity;
 import pl.hackatheon.sdm.points.BasePoint;
+import pl.hackatheon.sdm.points.battery.BatteryPointMapsActivity;
 import pl.hackatheon.sdm.points.medical.MedicalPointsMapsActivity;
 import pl.hackatheon.sdm.points.util.MarkerUtils;
 
@@ -105,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
         intent.setClassName("com.google.android.apps.maps",
                 "com.google.android.maps.MapsActivity");
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
+
+    public void startBatteryMapActivity(View view) {
+        Intent intent = new Intent(this, BatteryPointMapsActivity.class);
         startActivity(intent);
     }
 

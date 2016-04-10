@@ -52,6 +52,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme" >
         </activity>
+        <activity
+            android:name=".points.battery.BatteryPointMapsActivity"
+            android:label="@string/title_activity_battery_point_maps" >
+        </activity>
     </application>
 
 </manifest>

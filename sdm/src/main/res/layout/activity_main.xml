@@ -49,6 +49,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
                         android:drawableLeft="@drawable/bateryja"
+                        android:text="@string/battery_points"
+                        android:onClick="startBatteryMapActivity"/>
+            </TableRow>
+            <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1">
+                <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:drawableLeft="@drawable/bateryja"
                         android:text="@string/lead_to_battery_points"
                         android:onClick="startLeadToBatteryActivity"/>
             </TableRow>
