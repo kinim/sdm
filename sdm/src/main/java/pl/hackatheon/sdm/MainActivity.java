@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import pl.hackatheon.sdm.flashlight.FlashlightFullscreenActivity;
 import pl.hackatheon.sdm.points.BasePoint;
 import pl.hackatheon.sdm.points.medical.MedicalPointsMapsActivity;
 import pl.hackatheon.sdm.points.util.MarkerUtils;
@@ -118,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startFlashLightActivity(View view) {
-
+        Intent intent = new Intent(this, FlashlightFullscreenActivity.class);
+        startActivity(intent);
     }
 }
