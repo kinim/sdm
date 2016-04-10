@@ -1,7 +1,8 @@
-package pl.hackatheon.sdm.medical_points.util;
+package pl.hackatheon.sdm.points.util;
 
 import com.google.android.gms.maps.model.LatLng;
-import pl.hackatheon.sdm.medical_points.MedicalPoint;
+import pl.hackatheon.sdm.points.battery.BatteryPoint;
+import pl.hackatheon.sdm.points.medical.MedicalPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,8 @@ public class MarkerUtils {
     private static List<MedicalPoint> standardMedicalPoints;
     private static List<MedicalPoint> childrenMedicalPoints;
     private static List<MedicalPoint> care24HMedicalPoints;
+
+    private static List<BatteryPoint> batteryPoints;
 
     public static List<MedicalPoint> getStandardMedicalPoints() {
         if (standardMedicalPoints == null) {
@@ -42,8 +45,6 @@ public class MarkerUtils {
             care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.045642, 19.924389), "NZOZ Kraków-Południe", "ul. Szwedzka 27\t12 2660270"));
             care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.015474, 19.968252), "NZOZ Kraków-Południe", " ul. Białoruska 15\t12 6555189"));
             care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.040717, 19.941085), "NZOZ Kraków-Południe", "ul. Kutrzeby 4\t12 6561007"));
-            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.092643, 20.020000), "Szpital Specjalistyczny im. Ludwika Rydygiera", "os. Złotej Jesieni 1\t12 6468531"));
-            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.065694, 20.046117), "Szpital Specjalistyczny im. Stanisława Żeromskiego", "os. Na Skarpie 66\t12 3575248"));
         }
         return care24HMedicalPoints;
     }
@@ -76,5 +77,38 @@ public class MarkerUtils {
             }
         }
         return pointWithShortestPath;
+    }
+
+    public static BatteryPoint getBatteryPointWithShortestPath(double latitude, double longitude) {
+        List<BatteryPoint> batteryPoints = getBatteryPoints();
+        BatteryPoint pointWithShortestPath = null;
+        double shortestPath;
+        if (!batteryPoints.isEmpty()) {
+            BatteryPoint batteryPoint = batteryPoints.get(0);
+            shortestPath = Math.sqrt(Math.pow(batteryPoint.getLatLng().latitude - latitude, 2.0) + Math.pow(batteryPoint.getLatLng().longitude - longitude, 2.0));
+            pointWithShortestPath = batteryPoint;
+            for (BatteryPoint batteryPoint1 : batteryPoints) {
+                double pathLength = Math.sqrt(Math.pow(batteryPoint1.getLatLng().latitude - latitude, 2.0) + Math.pow(batteryPoint1.getLatLng().longitude - longitude, 2.0));
+                if (pathLength < shortestPath) {
+                    shortestPath = pathLength;
+                    pointWithShortestPath = batteryPoint1;
+                }
+            }
+        }
+        return pointWithShortestPath;
+    }
+
+    public static List<BatteryPoint> getBatteryPoints() {
+        if(batteryPoints == null) {
+            batteryPoints = new ArrayList<>();
+            batteryPoints.add(new BatteryPoint(new LatLng(50.0369654, 20.1012465)));
+            batteryPoints.add(new BatteryPoint(new LatLng(50.0388427, 20.113924)));
+            batteryPoints.add(new BatteryPoint(new LatLng(50.030592, 20.1000691)));
+            batteryPoints.add(new BatteryPoint(new LatLng(50.0627138, 19.9368016)));
+            batteryPoints.add(new BatteryPoint(new LatLng(50.0568592, 19.9373314)));
+            batteryPoints.add(new BatteryPoint(new LatLng(50.0668495, 19.9289602)));
+        }
+
+        return batteryPoints;
     }
 }

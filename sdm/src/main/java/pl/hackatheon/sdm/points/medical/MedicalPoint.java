@@ -1,10 +1,10 @@
-package pl.hackatheon.sdm.medical_points;
+package pl.hackatheon.sdm.points.medical;
 
 import com.google.android.gms.maps.model.LatLng;
+import pl.hackatheon.sdm.points.BasePoint;
 
-public class MedicalPoint {
+public class MedicalPoint extends BasePoint {
 
-    private LatLng latLng;
     private String title;
     private String address;
 
@@ -14,14 +14,6 @@ public class MedicalPoint {
         this.latLng = latLng;
         this.title = title;
         this.address = address;
-    }
-
-    public LatLng getLatLng() {
-        return latLng;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
     }
 
     public String getTitle() {

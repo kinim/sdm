@@ -1,4 +1,4 @@
-package pl.hackatheon.sdm.medical_points;
+package pl.hackatheon.sdm.points.medical;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import pl.hackatheon.sdm.R;
-import pl.hackatheon.sdm.medical_points.util.MarkerUtils;
+import pl.hackatheon.sdm.points.util.MarkerUtils;
 
 public class MedicalPointsMapsActivity extends FragmentActivity {
 

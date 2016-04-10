@@ -44,7 +44,7 @@
                 android:value="@string/google_maps_key"/>
 
         <activity
-                android:name=".medical_points.MedicalPointsMapsActivity"
+                android:name=".points.medical.MedicalPointsMapsActivity"
                 android:label="@string/title_activity_maps">
         </activity>
     </application>

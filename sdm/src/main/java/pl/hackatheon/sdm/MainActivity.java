@@ -12,9 +12,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import pl.hackatheon.sdm.medical_points.MedicalPoint;
-import pl.hackatheon.sdm.medical_points.MedicalPointsMapsActivity;
-import pl.hackatheon.sdm.medical_points.util.MarkerUtils;
+import pl.hackatheon.sdm.points.BasePoint;
+import pl.hackatheon.sdm.points.medical.MedicalPointsMapsActivity;
+import pl.hackatheon.sdm.points.util.MarkerUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void startLeadActivity(View view) {
         final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = getLocationListener(locationManager);
+        LocationListener locationListener = getLocationListener(locationManager, true);
         try {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
         } catch (SecurityException e) {
@@ -61,13 +61,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private LocationListener getLocationListener(final LocationManager locationManager) {
+    private LocationListener getLocationListener(final LocationManager locationManager, final boolean isMedical) {
         return new LocationListener() {
 
             @Override
             public void onLocationChanged(Location location) {
-                MedicalPoint medicalPoint = MarkerUtils.getMedicalPointWithShortestPath(location.getLatitude(), location.getLongitude());
-                leadToNearestMedicalPoint(medicalPoint);
+                BasePoint point;
+                if (isMedical) {
+                    point = MarkerUtils.getMedicalPointWithShortestPath(location.getLatitude(), location.getLongitude());
+                } else {
+                    point = MarkerUtils.getBatteryPointWithShortestPath(location.getLatitude(), location.getLongitude());
+                }
+                leadToNearestMedicalPoint(point);
                 try {
                     locationManager.removeUpdates(this);
                 } catch (SecurityException e) {
@@ -91,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private void leadToNearestMedicalPoint(MedicalPoint medicalPoint) {
+    private void leadToNearestMedicalPoint(BasePoint point) {
         final Intent intent = new Intent(Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?daddr="
-                        + medicalPoint.getLatLng().latitude + "," + medicalPoint.getLatLng().longitude)
+                        + point.getLatLng().latitude + "," + point.getLatLng().longitude)
         );
         intent.setClassName("com.google.android.apps.maps",
                 "com.google.android.maps.MapsActivity");
@@ -103,7 +108,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startLeadToBatteryActivity(View view) {
-
+        final LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locationListener = getLocationListener(locationManager, false);
+        try {
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        } catch (SecurityException e) {
+            Log.e(e.getLocalizedMessage(), e.getMessage());
+        }
     }
 
     public void startFlashLightActivity(View view) {
