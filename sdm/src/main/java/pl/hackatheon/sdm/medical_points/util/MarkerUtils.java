@@ -10,6 +10,7 @@ public class MarkerUtils {
 
     private static List<MedicalPoint> standardMedicalPoints;
     private static List<MedicalPoint> childrenMedicalPoints;
+    private static List<MedicalPoint> care24HMedicalPoints;
 
     public static List<MedicalPoint> getStandardMedicalPoints() {
         if (standardMedicalPoints == null) {
@@ -31,12 +32,30 @@ public class MarkerUtils {
         return childrenMedicalPoints;
     }
 
+    public static List<MedicalPoint> getCare24HMedicalPoints() {
+        if (care24HMedicalPoints == null) {
+            care24HMedicalPoints = new ArrayList<>();
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.059127, 19.962188), "OPC sp.z o.o.sp.komandytowa", "Al. Pokoju 4\t12 4118396"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.086071, 19.926632), "Niepubliczny Zakład Opieki Zdrowotnej Przychodnia Lekarska Specjalista", "ul. Rusznikarska 17\t12 3575010"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.072213, 19.913977), "Niepubliczny Zakład Opieki Zdrowotnej", "ul. Galla 24\t12 2947383 "));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.053883, 19.919776), "OPC sp.z o.o.sp.komandytowa", "ul. Komorowskiego 12\t12 3571475 "));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.045642, 19.924389), "NZOZ Kraków-Południe", "ul. Szwedzka 27\t12 2660270"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.015474, 19.968252), "NZOZ Kraków-Południe", " ul. Białoruska 15\t12 6555189"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.040717, 19.941085), "NZOZ Kraków-Południe", "ul. Kutrzeby 4\t12 6561007"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.092643, 20.020000), "Szpital Specjalistyczny im. Ludwika Rydygiera", "os. Złotej Jesieni 1\t12 6468531"));
+            care24HMedicalPoints.add(new MedicalPoint(new LatLng(50.065694, 20.046117), "Szpital Specjalistyczny im. Stanisława Żeromskiego", "os. Na Skarpie 66\t12 3575248"));
+        }
+        return care24HMedicalPoints;
+    }
+
     public static List<MedicalPoint> getAllMedicalPoints() {
         List<MedicalPoint> standard = getStandardMedicalPoints();
         List<MedicalPoint> children = getChildrenMedicalPoints();
+        List<MedicalPoint> care24h = getCare24HMedicalPoints();
         List<MedicalPoint> all = new ArrayList<>();
         all.addAll(standard);
         all.addAll(children);
+        all.addAll(care24h);
         return all;
     }
 
@@ -44,7 +63,8 @@ public class MarkerUtils {
         List<MedicalPoint> allMedicalPoints = getAllMedicalPoints();
         MedicalPoint pointWithShortestPath = null;
         double shortestPath;
-        for (MedicalPoint medicalPoint : allMedicalPoints) {
+        if (!allMedicalPoints.isEmpty()) {
+            MedicalPoint medicalPoint = allMedicalPoints.get(0);
             shortestPath = Math.sqrt(Math.pow(medicalPoint.getLatLng().latitude - latitude, 2.0) + Math.pow(medicalPoint.getLatLng().longitude - longitude, 2.0));
             pointWithShortestPath = medicalPoint;
             for (MedicalPoint medicalPoint1 : allMedicalPoints) {

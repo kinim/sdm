@@ -93,5 +93,13 @@ public class MedicalPointsMapsActivity extends FragmentActivity {
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.baby_svg))
             );
         }
+        for (MedicalPoint medicalPoint : MarkerUtils.getCare24HMedicalPoints()) {
+            mMap.addMarker(new MarkerOptions()
+                    .position(medicalPoint.getLatLng())
+                    .title(medicalPoint.getTitle())
+                    .snippet(medicalPoint.getAddress())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            );
+        }
     }
 }
